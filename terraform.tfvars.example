@@ -1,0 +1,24 @@
+# Project Configuration
+name_prefix = "example-app"
+environment = "dev"
+
+# AWS Configuration
+aws_region = "us-west-2"
+
+# Instance Configuration
+instance_type = "t3.micro"
+key_pair_name = "my-key-pair" # Optional: Remove if you don't need SSH access
+
+# Auto Scaling Configuration
+min_size         = 1
+max_size         = 5
+desired_capacity = 2
+
+# Security Configuration
+enable_ssh_access = false
+ssh_cidr_blocks   = "10.0.0.0/8" # Only used if enable_ssh_access is true
+
+# Target Groups (optional)
+# target_group_arns = [
+#   "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/50dc6c495c0c9188"
+# ]
