@@ -73,13 +73,6 @@ variable "desired_capacity" {
   }
 }
 
-# Load Balancer Configuration
-variable "target_group_arns" {
-  description = "List of target group ARNs to associate with the autoscaling group"
-  type        = list(string)
-  default     = []
-}
-
 # Security Configuration
 variable "enable_ssh_access" {
   description = "Enable SSH access to instances"
@@ -91,6 +84,19 @@ variable "ssh_cidr_blocks" {
   description = "CIDR blocks allowed for SSH access"
   type        = string
   default     = "10.0.0.0/8"
+}
+
+# Application Configuration
+variable "app_port" {
+  description = "Port number that the application listens on"
+  type        = number
+  default     = 80
+}
+
+variable "health_check_path" {
+  description = "Health check path for the load balancer target group"
+  type        = string
+  default     = "/"
 }
 
 # Automatically injected by Terraform

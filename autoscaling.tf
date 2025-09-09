@@ -12,15 +12,17 @@ resource "aws_launch_template" "this" {
   instance_type = var.instance_type
   key_name      = var.key_pair_name
 
-  vpc_security_group_ids = [aws_security_group.this.id]
-
   user_data = base64encode(<<-EOF
 #!/bin/bash
 /usr/local/bin/update-environment.sh ${var.environment}
 EOF
   )
 
-  # TODO: disable public IP assignment *if* that is happening
+  network_interfaces {
+    associate_public_ip_address = false
+    security_groups             = [aws_security_group.this.id]
+    delete_on_termination       = true
+  }
 
   monitoring {
     enabled = true
@@ -61,8 +63,8 @@ EOF
 resource "aws_autoscaling_group" "this" {
   name                      = "${var.name_prefix}-asg"
   vpc_zone_identifier       = data.aws_subnets.default.ids
-  target_group_arns         = var.target_group_arns
-  health_check_type         = length(var.target_group_arns) > 0 ? "ELB" : "EC2"
+  target_group_arns         = [aws_lb_target_group.this.arn]
+  health_check_type         = "ELB"
   health_check_grace_period = 300
 
   min_size         = var.min_size

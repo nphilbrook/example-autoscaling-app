@@ -1,21 +1,21 @@
 resource "aws_security_group" "this" {
-  name_prefix = "${var.name_prefix}-"
-  description = "Security group for ${var.name_prefix} autoscaling group"
+  name_prefix = "${var.name_prefix}-instances-"
+  description = "Security group for ${var.name_prefix} autoscaling group instances"
   vpc_id      = data.aws_vpc.default.id
 
-  tags = {
-    Name = "${var.name_prefix}-sg"
-  }
+  tags = merge(local.additional_tags, {
+    Name = "${var.name_prefix}-instances-sg"
+  })
 }
 
-resource "aws_vpc_security_group_ingress_rule" "http" {
+resource "aws_vpc_security_group_ingress_rule" "http_from_alb" {
   security_group_id = aws_security_group.this.id
-  description       = "HTTP"
+  description       = "HTTP from ALB"
 
-  cidr_ipv4   = "0.0.0.0/0"
-  from_port   = 80
-  to_port     = 80
-  ip_protocol = "tcp"
+  referenced_security_group_id = aws_security_group.alb.id
+  from_port                    = var.app_port
+  to_port                      = var.app_port
+  ip_protocol                  = "tcp"
 
   tags = {
     Name = "${var.name_prefix}-http"
