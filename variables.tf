@@ -65,7 +65,7 @@ variable "max_size" {
 variable "desired_capacity" {
   description = "Desired number of instances in the autoscaling group"
   type        = number
-  default     = 2
+  default     = 1
 
   validation {
     condition     = var.desired_capacity >= var.min_size && var.desired_capacity <= var.max_size
