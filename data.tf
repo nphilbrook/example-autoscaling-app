@@ -1,5 +1,5 @@
 data "hcp_packer_artifact" "this" {
-  bucket_name  = "example-app-3"
+  bucket_name  = "test-app-tfe"
   channel_name = "dev"
   platform     = "aws"
   region       = var.aws_region

@@ -20,6 +20,8 @@ resource "aws_launch_template" "this" {
 EOF
   )
 
+  # TODO: disable public IP assignment *if* that is happening
+
   monitoring {
     enabled = true
   }
