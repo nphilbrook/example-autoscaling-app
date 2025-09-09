@@ -73,19 +73,6 @@ variable "desired_capacity" {
   }
 }
 
-# Security Configuration
-variable "enable_ssh_access" {
-  description = "Enable SSH access to instances"
-  type        = bool
-  default     = false
-}
-
-variable "ssh_cidr_blocks" {
-  description = "CIDR blocks allowed for SSH access"
-  type        = string
-  default     = "10.0.0.0/8"
-}
-
 # Application Configuration
 variable "app_port" {
   description = "Port number that the application listens on"
