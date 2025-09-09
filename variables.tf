@@ -30,7 +30,7 @@ variable "environment" {
 variable "instance_type" {
   description = "EC2 instance type for the autoscaling group"
   type        = string
-  default     = "t3.nano"
+  default     = "t3.micro"
 }
 
 variable "key_pair_name" {
