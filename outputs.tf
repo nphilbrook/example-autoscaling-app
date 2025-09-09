@@ -38,23 +38,7 @@ output "hcp_packer_build_id" {
 }
 
 # Scaling Policy outputs
-output "scale_up_policy_arn" {
-  description = "ARN of the scale up policy"
-  value       = aws_autoscaling_policy.scale_up.arn
-}
-
-output "scale_down_policy_arn" {
-  description = "ARN of the scale down policy"
-  value       = aws_autoscaling_policy.scale_down.arn
-}
-
-# CloudWatch Alarms outputs
-output "cpu_high_alarm_arn" {
-  description = "ARN of the CPU high alarm"
-  value       = aws_cloudwatch_metric_alarm.cpu_high.arn
-}
-
-output "cpu_low_alarm_arn" {
-  description = "ARN of the CPU low alarm"
-  value       = aws_cloudwatch_metric_alarm.cpu_low.arn
+output "target_tracking_policy_arn" {
+  description = "ARN of the target tracking scaling policy"
+  value       = aws_autoscaling_policy.target_tracking_cpu.arn
 }
